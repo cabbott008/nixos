@@ -6,6 +6,7 @@
   imports =
     [ # Include the results of the hardware scan.
       "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+      "${modulesPath}/installer/cd-dvd/channel.nix"
       ./xisohardware.nix
     ];
 
