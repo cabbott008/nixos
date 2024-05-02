@@ -114,6 +114,7 @@
       vifm
       rofi
       rofimoji
+      trash-cli
       vivaldi
       obsidian
       audacity 
