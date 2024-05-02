@@ -7,7 +7,7 @@
       ./thardware.nix
       inputs.disko.nixosModules.default
         (import ./tdisko.nix { device = "/dev/sda"; })  
-      ../../default.nix
+      ../../base.nix
     ];
 
     networking.hostName = "tNix";

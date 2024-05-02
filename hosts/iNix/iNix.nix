@@ -7,7 +7,7 @@
       ./ihardware.nix
       inputs.disko.nixosModules.default
         (import ./idisko.nix { device = "/dev/sda"; })  
-      ../../default.nix
+      ../../base.nix
     ];
 
     networking.hostName = "iNix";
