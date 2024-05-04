@@ -1,6 +1,6 @@
-# ----- * NixOS Default Config* - default.nix ----- 
+# ----- * NixOS Default Config* - base.nix ----- 
 
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # Variables
     environment.sessionVariables = {
@@ -14,13 +14,9 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Network Settings
-    networking = {
-      wireless.networks = {
-        "b185e8" = {
-          pskRaw = "183d3e71f0b56b4ca8f14137addd5c4be801c2c0798a60502442fec7303bec87";
-        };
-      };
-    };
+    networking.wireless.networks = {
+      "(HM777)".priority = true;
+    };  
 
   # Set your time zone.
     time.timeZone = "America/Chicago";
@@ -142,7 +138,7 @@
       pcmanfm
       rsync
       gimp
-      neofetch
+      fastfetch
       remmina
       unzip
     ];
