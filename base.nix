@@ -72,7 +72,7 @@
 
   # Enable Bluetooth
     hardware.bluetooth.enable = true;
-
+  
   # Enable sound.
     sound.enable = true;
     hardware.pulseaudio.enable = false;
@@ -102,7 +102,6 @@
       tree
       git
       gh
-      qtile
       sxhkd
       feh
       neovim
@@ -127,6 +126,9 @@
       nvd
       pavucontrol
       libqalculate
+      bluez
+      bluez-tools
+      bluetuith
       zathura
       vlc
       yt-dlp
