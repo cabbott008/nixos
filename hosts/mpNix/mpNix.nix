@@ -25,4 +25,6 @@
       dpi = 288;
       upscaleDefaultCursor = true;
     };
+    
+    services.mbpfan.enable = true;
 }
