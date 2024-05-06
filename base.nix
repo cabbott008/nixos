@@ -23,12 +23,12 @@
       wireless = {
         iwd = {
           enable = true;
-#         settings = {
-#           IPv6.Enabled = true;
-#           Settings = {
-#             AutoConnect = true; 
-#           };
-#         };
+          settings = {
+            IPv6.Enabled = true;
+            Settings = {
+              AutoConnect = true; 
+            };
+          };
         };
       };
     };
@@ -59,7 +59,15 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        lightdm.enable = true;
+        lightdm = {
+          enable = true;
+          greeters.slick = {
+            enable = true;
+            theme.name = "Adwaita";
+            iconTheme.name = "Adwaita";
+            extraConfig = "";
+          };
+        };
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
         '';

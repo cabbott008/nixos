@@ -12,18 +12,21 @@
 
     networking.hostName = "iNix";
 
+  # Services
+    services.xserver = {
+      displayManager = {
+        lightdm.background = /home/wa/.config/lightdm;
+      };
+    };
+
   # Define additional user accounts. 
     users.users.ct = {
       isNormalUser = true;
-      extraGroups = [ "networkManager" ]; 
+      extraGroups = [ "networkmanager" ]; 
     };
 
     users.users.wa = {
       isNormalUser = true;
-      extraGroups = [ "networkManager" ]; 
+      extraGroups = [ "networkmanager" ]; 
     };
-
-  # Variables
-#   environment.variables = {
-#   };
 }
