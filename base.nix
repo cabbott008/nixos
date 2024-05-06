@@ -14,9 +14,21 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Network Settings
-    networking.wireless.networks = {
-      "(HM777)".priority = true;
-    };  
+    networking = {
+      wireless.iwd = {
+        enable = true;
+        settings = {
+          IPv6.Enabled = true;
+          Settings = {
+            AutoConnect = true; 
+          };
+        };
+      };
+      networkmanager = {
+        enable = true;
+        wifi.backend = "iwd";
+      };
+    };
 
   # Set your time zone.
     time.timeZone = "America/Chicago";
@@ -44,16 +56,17 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        gdm.enable = true;
+        lightdm.enable = true;
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
         '';
       };  
       desktopManager = {
-        gnome.enable = true;
         wallpaper.mode = "fill";
       };
-      windowManager.qtile.enable = true;
+      windowManager.qtile = {
+        enable = true;
+      };
       xkb = {
         layout = "us";
         variant = "";
@@ -65,7 +78,7 @@
     };
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+    services.openssh.enable = true;
 
   # Enable CUPS to print documents.
     services.printing.enable = true;
@@ -99,6 +112,7 @@
   # $ nix search wget
     environment.systemPackages = with pkgs; [
       wget
+      iwgtk
       tree
       git
       gh
@@ -114,6 +128,7 @@
       obsidian
       audacity 
       kitty
+      pass
       fzf
       fd
       btop
@@ -149,12 +164,6 @@
     fonts.packages = with pkgs; [
     ];
   
-  # Excluded Gnome Packages
-    environment.gnome.excludePackages = 
-      (with pkgs; [gnome-photos gnome-tour gedit]) 
-      ++ (with pkgs.gnome; [baobab cheese eog epiphany simple-scan totem tali iagno hitori atomix yelp evince file-roller seahorse gnome-calculator gnome-calendar gnome-characters gnome-contacts gnome-font-viewer gnome-logs gnome-music gnome-screenshot gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections gnome-terminal 
-      ]);
-
   # DO NOT ALTER OR DELETE
     system.stateVersion = "24.05";
 }
