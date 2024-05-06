@@ -14,6 +14,7 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Network Settings
+    hardware.bluetooth.enable = true;
     networking = {
       networkmanager = {
         enable = true;
@@ -33,23 +34,6 @@
       };
     };
 
-  # Set your time zone.
-    time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-    i18n.defaultLocale = "en_US.UTF-8";
-    i18n.extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_INDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
-
   # Enable X11 and Desktop Environment
     services.xserver = {
       enable = true;
@@ -59,9 +43,9 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        startx = {
-          enable = true;        
-        };
+        lightdm.enable = true;
+#        startx.enable = true;
+#       defaultSession = "none+qtile"; 
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
         '';
@@ -82,17 +66,13 @@
       ];
     };
 
-  # Secrets
-    services.gnome3.gnome-keyring.enable = true;
-
-  # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-    services.printing.enable = true;
-
-  # Enable Bluetooth
-    hardware.bluetooth.enable = true;
+  # Misc. Services 
+    services = {
+      gnome3.gnome-keyring.enable = true;
+      openssh.enable = true;
+      printing.enable = true;
+      udisks2.enable = true;
+    };
   
   # Enable sound.
     sound.enable = true;
@@ -103,12 +83,6 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-    };
-
-  # Define a user account. 
-    users.users.ca = {
-      isNormalUser = true;
-      extraGroups = [ "sudo" "networkmanager" "wheel" ]; 
     };
 
   # Allow unfree packages
@@ -172,6 +146,29 @@
     fonts.packages = with pkgs; [
     ];
   
+  # Define a user account. 
+    users.users.ca = {
+      isNormalUser = true;
+      extraGroups = [ "sudo" "networkmanager" "wheel" ]; 
+    };
+
+  # Set your time zone.
+    time.timeZone = "America/Chicago";
+
+  # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.UTF-8";
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_INDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+
   # DO NOT ALTER OR DELETE
     system.stateVersion = "24.05";
 }
