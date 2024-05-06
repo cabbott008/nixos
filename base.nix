@@ -58,8 +58,9 @@
         touchpad.naturalScrolling = true;
         mouse.naturalScrolling = true;
       };
-      displayManager.startx = {
-        enable = true;        
+      displayManager = {
+        startx = {
+          enable = true;        
         };
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
