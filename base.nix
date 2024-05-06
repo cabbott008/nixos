@@ -1,6 +1,6 @@
 # ----- * NixOS Default Config* - base.nix ----- 
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Variables
     environment.sessionVariables = {
@@ -15,18 +15,21 @@
 
   # Network Settings
     networking = {
-      wireless.iwd = {
-        enable = true;
-        settings = {
-          IPv6.Enabled = true;
-          Settings = {
-            AutoConnect = true; 
-          };
-        };
-      };
       networkmanager = {
         enable = true;
         wifi.backend = "iwd";
+      };
+      useDHCP = lib.mkDefault true;
+      wireless = {
+        iwd = {
+          enable = true;
+#         settings = {
+#           IPv6.Enabled = true;
+#           Settings = {
+#             AutoConnect = true; 
+#           };
+#         };
+        };
       };
     };
 
@@ -77,6 +80,9 @@
       ];
     };
 
+  # Secrets
+    services.gnome3.gnome-keyring.enable = true;
+
   # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
@@ -100,7 +106,7 @@
   # Define a user account. 
     users.users.ca = {
       isNormalUser = true;
-      extraGroups = [ "sudo" "networkManager" "wheel" ]; 
+      extraGroups = [ "sudo" "networkmanager" "wheel" ]; 
     };
 
   # Allow unfree packages
@@ -111,8 +117,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
     environment.systemPackages = with pkgs; [
+      networkmanagerapplet
       wget
-      iwgtk
       tree
       git
       gh
